@@ -158,8 +158,8 @@ public class JabRefFrame extends JFrame implements OutputPrinter {
                 selectionModel.addListSelectionListener(new ListSelectionListener() {
 
                     @Override
-                    public void valueChanged(ListSelectionEvent e) {
-                        if (!e.getValueIsAdjusting()) {
+                    public void valueChanged(ListSelectionEvent ex) {
+                        if (!ex.getValueIsAdjusting()) {
                             String citeKey = (String) model[table.getSelectedRow()][0];
                             String fieldName = (String) model[table.getSelectedRow()][1];
                             basePanel().editEntryByKeyAndFocusField(citeKey, fieldName);
@@ -2365,40 +2365,40 @@ FindUnlinkedFilesDialog.ACTION_COMMAND,
     }
 
     public void setSearchBarVisible(boolean visible) {
-  	  searchBar.setVisible(visible);
-  	  searchToggle.setSelected(visible);
-  	  if(visible) {
-        setTabAreaInsets(tabbedPane, new Insets(3, 2, 2, 250));
-    } else {
-        setTabAreaInsets(tabbedPane, new Insets(3, 2, 2, 2));
-    }
+        searchBar.setVisible(visible);
+        searchToggle.setSelected(visible);
+        if (visible) {
+            setTabAreaInsets(tabbedPane, new Insets(3, 2, 2, 250));
+        } else {
+            setTabAreaInsets(tabbedPane, new Insets(3, 2, 2, 2));
+        }
     }
 
-
-  // Copied from org.pushingpixels.lafwidget.LafWidgetSupport
-  // http://jarvis.cs.ucdavis.edu/code_essence/functions/5829321
-  // We need to use reflection to change the tabAreaInsets since a TappedPaneUI does not provide an easier way to set this
-  private void setTabAreaInsets(JTabbedPane tabbedPane, Insets tabAreaInsets) {
-	  TabbedPaneUI ui = tabbedPane.getUI();
-	  if (ui instanceof BasicTabbedPaneUI) {
-		  try {
-			  Class<?> clazz = ui.getClass();
-			  while (clazz != null) {
-				  try {
-					  Field fld = clazz.getDeclaredField("tabAreaInsets");
-					  if (fld != null) {
-						  fld.setAccessible(true);
-						  fld.set(ui, tabAreaInsets);
-						  return;
-					  }
-				  } catch (NoSuchFieldException nsfe) {
-				  }
-				  clazz = clazz.getSuperclass();
-			  }
-		  } catch (Throwable t) {
-			  // ignore all fall through
-		  }
-	  }
-	  throw new UnsupportedOperationException();
-  }
+    // Copied from org.pushingpixels.lafwidget.LafWidgetSupport
+    // http://jarvis.cs.ucdavis.edu/code_essence/functions/5829321
+    // We need to use reflection to change the tabAreaInsets since a TappedPaneUI does not provide an easier way to set this
+    private void setTabAreaInsets(JTabbedPane tabbedPane, Insets tabAreaInsets) {
+        TabbedPaneUI ui = tabbedPane.getUI();
+        if (ui instanceof BasicTabbedPaneUI) {
+            try {
+                Class<?> clazz = ui.getClass();
+                while (clazz != null) {
+                    try {
+                        Field fld = clazz.getDeclaredField("tabAreaInsets");
+                        if (fld != null) {
+                            fld.setAccessible(true);
+                            fld.set(ui, tabAreaInsets);
+                            return;
+                        }
+                    } catch (NoSuchFieldException nsfe) {
+                        // ignored
+                    }
+                    clazz = clazz.getSuperclass();
+                }
+            } catch (Throwable t) {
+                // ignore all fall through
+            }
+        }
+        throw new UnsupportedOperationException();
+    }
 }
