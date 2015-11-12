@@ -180,24 +180,24 @@ public class PreferencesDialog extends JDialog {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                String filename = FileDialogs.getNewFile(frame, new File(System
-                        .getProperty("user.home")), ".xml", JFileChooser.SAVE_DIALOG, false);
+                String filename = FileDialogs
+                        .getNewFile(frame, new File(System.getProperty("user.home")), ".xml", JFileChooser.SAVE_DIALOG,
+                                false);
                 if (filename == null) {
                     return;
                 }
                 File file = new File(filename);
-                if (!file.exists()
-                        || (JOptionPane.showConfirmDialog(PreferencesDialog.this, '\'' + file.getName()
-                        + "' " + Localization.lang("exists. Overwrite file?"),
-                        Localization.lang("Export preferences"), JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)) {
+                if (!file.exists() || (JOptionPane.showConfirmDialog(PreferencesDialog.this,
+                        '\'' + file.getName() + "' " + Localization.lang("exists. Overwrite file?"),
+                        Localization.lang("Export preferences"), JOptionPane.OK_CANCEL_OPTION)
+                        == JOptionPane.OK_OPTION)) {
 
                     try {
                         prefs.exportPreferences(filename);
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(PreferencesDialog.this,
-                                Localization.lang("Could not export preferences")
-                                + ": " + ex.getMessage(), Localization.lang("Export preferences"),
-                                JOptionPane.ERROR_MESSAGE);
+                    } catch (JabRefException ex) {
+                        LOGGER.warn(ex.getMessage(), ex);
+                        JOptionPane.showMessageDialog(PreferencesDialog.this, ex.getLocalizedMessage(),
+                                Localization.lang("Export preferences"), JOptionPane.ERROR_MESSAGE);
                     }
                 }
 
@@ -222,9 +222,9 @@ public class PreferencesDialog extends JDialog {
                     frame.removeCachedEntryEditors();
                     Globals.prefs.updateEntryEditorTabList();
                 } catch (JabRefException ex) {
+                    LOGGER.warn(ex.getMessage(), ex);
                     JOptionPane.showMessageDialog(PreferencesDialog.this, ex.getLocalizedMessage(),
                             Localization.lang("Import preferences"), JOptionPane.ERROR_MESSAGE);
-                    LOGGER.warn(ex.getMessage(), ex);
                 }
             }
 
