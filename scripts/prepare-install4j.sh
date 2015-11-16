@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # ensure that downloads directory exists
-if [[ ! -d "~/downloads" ]]; then
+if [ ! -d "~/downloads" ]; then
   mkdir ~/downloads
 fi
 
 # ensure that tar archive of install4j exists
 cd ~/downloads
-if [[ ! -f install4j_unix_6_0_4.tar.gz ]]; then
+if [ ! -f install4j_unix_6_0_4.tar.gz ]; then
   wget --quiet http://download-aws.ej-technologies.com/install4j/install4j_unix_6_0_4.tar.gz
 fi;
 
@@ -16,7 +16,7 @@ cd ~/jabref
 tar -xzf downloads/install4j_unix_6_0_4.tar.gz
 
 # fetch JREs
-if [[ ! -d "~/.install4j/jres/" ]]; then
+if [ ! -d "~/.install4j/jres/" ]; then
   mkdir -p ~/.install4j/jres/
 fi
 cd ~/.install4j/jres/
