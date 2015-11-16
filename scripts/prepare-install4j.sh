@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 # ensure that downloads directory exists
-if [ ! -d "~/downloads" ]; then
+if [ ! -d ~/downloads ]; then
   mkdir ~/downloads
 fi
 
@@ -13,7 +13,7 @@ fi;
 
 # extract tar archive of install4j into the source directory of JabRef
 cd ~/jabref
-tar -xzf downloads/install4j_unix_6_0_4.tar.gz
+tar -xzf ~/downloads/install4j_unix_6_0_4.tar.gz
 
 # fetch JREs
 if [ ! -d "~/.install4j/jres/" ]; then
