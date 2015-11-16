@@ -9,7 +9,7 @@ dependencies:
   override:
     - TERM=dumb ./gradlew dependencies
   cache_directories:
-    - "~/.install4j"
+    - "~/.install4j6"
     - "~/downloads"
 
 test:

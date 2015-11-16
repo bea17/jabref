@@ -16,16 +16,13 @@ cd ~/jabref
 tar -xzf ~/downloads/install4j_unix_6_0_4.tar.gz
 
 # fetch JREs
-if [ ! -d ~/.install4j/jres/ ]; then
-  mkdir -p ~/.install4j/jres/
+if [ ! -d ~/.install4j6/jres/ ]; then
+  mkdir -p ~/.install4j6/jres/
 fi
-cd ~/.install4j/jres/
+cd ~/.install4j6/jres/
 wget --quiet -nc http://files.jabref.org/jres/windows-x86-1.8.0_66.tar.gz
 wget --quiet -nc http://files.jabref.org/jres/windows-amd64-1.8.0_66.tar.gz
 wget --quiet -nc http://files.jabref.org/jres/macosx-amd64-1.8.0_66_unpacked.tar.gz
 
-ls -la ~/.intall4j/
-ls -la ~/.intall4j/jres/
-ls -la /home/ubuntu/.install4j6/
-ls -la /home/ubuntu/.install4j6/jres/
-ls -la /home/ubuntu/.install4j6/jres/windows-x86-1.8.0_66.tar.gz
+ls -la ~/.install4j6/
+ls -la ~/.install4j6/jres/
