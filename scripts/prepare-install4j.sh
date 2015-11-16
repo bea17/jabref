@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 # ensure that downloads directory exists
 if [ ! -d ~/downloads ]; then
@@ -16,7 +16,7 @@ cd ~/jabref
 tar -xzf ~/downloads/install4j_unix_6_0_4.tar.gz
 
 # fetch JREs
-if [ ! -d "~/.install4j/jres/" ]; then
+if [ ! -d ~/.install4j/jres/ ]; then
   mkdir -p ~/.install4j/jres/
 fi
 cd ~/.install4j/jres/
